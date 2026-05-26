@@ -1,16 +1,22 @@
 package se.yrgo.dataaccess;
 
 import java.util.List;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import se.yrgo.domain.Call;
 import se.yrgo.domain.Customer;
 
+@Repository
 public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @PostConstruct
     public void createTables() {
         jdbcTemplate.execute("DROP TABLE CUSTOMER IF EXISTS");
         jdbcTemplate.execute("DROP TABLE CALLS IF EXISTS");
